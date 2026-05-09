@@ -10,8 +10,8 @@
       --primary-dark: #353A5F;
       --primary-light: #9EBAF3;
       --bg-deep: #0f121d;
-      --bg-opacity: 0.7;
-      --bg-blur: 1px;
+      --bg-opacity: 0.2;
+      --bg-blur: 2px;
     }
 
     * {
@@ -40,7 +40,7 @@
     body::before {
       content: '';
       position: fixed;
-      inset: 0;
+      inset: 0.2;
       background-color: var(--bg-deep);
       opacity: calc(1 - var(--bg-opacity));
       z-index: 0;
@@ -93,6 +93,11 @@
       box-shadow: 0 0 10px rgba(158, 186, 243, 0.1);
     }
 
+    input.input-error {
+      border-color: #f87171 !important;
+      box-shadow: 0 0 10px rgba(248, 113, 113, 0.2) !important;
+    }
+
     select option {
       background-color: #1a1e2e;
       color: white;
@@ -115,9 +120,29 @@
     }
 
     .btn-primary:disabled {
-      opacity: 0.5;
+      opacity: 0.4;
       cursor: not-allowed;
-      filter: grayscale(0.5);
+      filter: grayscale(0.6);
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    .btn-danger {
+      background: rgba(248, 113, 113, 0.2);
+      color: #f87171;
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-danger:hover:not(:disabled) {
+      background: rgba(248, 113, 113, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-danger:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      filter: grayscale(0.6);
     }
 
     .btn-secondary {
@@ -132,152 +157,7 @@
       transform: translateY(-2px);
     }
 
-    .btn-secondary:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-      background: rgba(255, 255, 255, 0.03) !important;
-      border-color: rgba(255, 255, 255, 0.05) !important;
-    }
-
-    .admin-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 18, 29, 0.95);
-      z-index: 100;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      overflow-y: auto;
-      padding: 16px;
-    }
-
-    .admin-modal.active {
-      display: flex;
-    }
-
-    .status-msg {
-      display: none;
-      animation: slideIn 0.4s ease-out;
-    }
-
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .settings-section {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .settings-title {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: rgba(255, 255, 255, 0.5);
-      margin-bottom: 12px;
-    }
-
-    .error-text {
-      color: #f87171;
-      font-size: 0.75rem;
-      margin-top: 0.25rem;
-    }
-
-    .success-text {
-      color: #4ade80;
-      font-size: 0.75rem;
-      margin-top: 0.25rem;
-    }
-
-    /* Phone number row */
-    .phone-input-row {
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-      width: 100%;
-      max-width: 100%;
-      box-sizing: border-box;
-    }
-
-    .country-select-wrapper {
-      position: relative;
-      width: 85px;
-      min-width: 85px;
-      max-width: 85px;
-      flex-shrink: 0;
-      box-sizing: border-box;
-    }
-
-    .country-select {
-      -webkit-appearance: none !important;
-      -moz-appearance: none !important;
-      appearance: none !important;
-      background-color: rgba(255, 255, 255, 0.05) !important;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%239EBAF3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
-      background-repeat: no-repeat !important;
-      background-position: right 4px center !important;
-      background-size: 10px !important;
-      padding: 12px 20px 12px 8px !important;
-      font-size: 12px !important;
-      width: 100% !important;
-      cursor: pointer !important;
-      border: 1px solid rgba(255, 255, 255, 0.1) !important;
-      border-radius: 16px !important;
-      color: white !important;
-      line-height: 1.4 !important;
-      height: auto !important;
-      min-height: 48px !important;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-      display: block !important;
-      margin: 0 !important;
-      box-sizing: border-box;
-    }
-
-    .country-select option {
-      background-color: #1a1e2e !important;
-      color: white !important;
-      padding: 10px !important;
-      font-size: 13px !important;
-    }
-
-    .phone-input-field {
-      flex: 1 1 auto;
-      min-width: 0;
-      box-sizing: border-box;
-    }
-
-    .phone-input-field input {
-      width: 100% !important;
-      min-width: 0 !important;
-      flex: 1 !important;
-      padding: 12px 16px !important;
-      border-radius: 16px !important;
-      box-sizing: border-box !important;
-      font-size: 14px !important;
-    }
-
-    /* Contact counter */
-    .contact-counter {
-      text-align: center;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: rgba(158, 186, 243, 0.7);
-      margin-top: 16px;
-      font-weight: 600;
-      min-height: 16px;
-    }
-
-    /* Verification Gate */
-    .verification-gate {
+    .channel-gate-overlay {
       position: fixed;
       inset: 0;
       background: rgba(15, 18, 29, 0.97);
@@ -287,269 +167,200 @@
       justify-content: center;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      padding: 16px;
+      padding: 20px;
     }
 
-    .verification-gate.hidden {
+    .channel-gate-overlay.hidden {
       display: none;
+    }
+
+    .channel-gate-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      padding: 24px;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      backdrop-filter: blur(20px);
     }
 
     .channel-btn {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 16px;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
       background: rgba(255, 255, 255, 0.05);
-      border: 2px solid rgba(158, 186, 243, 0.3);
-      border-radius: 16px;
       color: white;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      margin-bottom: 12px;
-      font-weight: 600;
-      font-size: 14px;
       cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: left;
+      text-decoration: none;
     }
 
-    .channel-btn:hover {
-      background: rgba(158, 186, 243, 0.1);
+    .channel-btn:hover:not(.completed) {
+      background: rgba(255, 255, 255, 0.1);
       border-color: var(--primary-light);
     }
 
     .channel-btn.completed {
+      opacity: 0.4;
       background: rgba(74, 222, 128, 0.1);
       border-color: rgba(74, 222, 128, 0.3);
-      opacity: 0.5;
-      pointer-events: none;
       cursor: not-allowed;
+      filter: grayscale(0.8);
     }
 
-    .channel-btn .check-icon {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      flex-shrink: 0;
-      transition: all 0.3s ease;
-    }
+    .channel-btn .btn-icon { font-size: 20px; flex-shrink: 0; }
+    .channel-btn .btn-check { margin-left: auto; color: #4ade80; font-size: 18px; display: none; }
+    .channel-btn.completed .btn-check { display: block; }
 
-    .channel-btn.completed .check-icon {
-      background: #4ade80;
-      border-color: #4ade80;
-      color: #0f121d;
-    }
-
-    .verify-btn {
+    .verify-gate-btn {
       width: 100%;
       padding: 16px;
-      border-radius: 16px;
+      border-radius: 14px;
+      border: none;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       font-size: 13px;
-      border: none;
       cursor: pointer;
       transition: all 0.3s ease;
       margin-top: 8px;
     }
 
-    .verify-btn.locked {
-      background: rgba(255, 255, 255, 0.1);
-      color: rgba(255, 255, 255, 0.3);
-      cursor: not-allowed;
-      pointer-events: none;
+    .verify-gate-btn.locked { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.3); cursor: not-allowed; }
+    .verify-gate-btn.half { background: rgba(158,186,243,0.4); color: rgba(255,255,255,0.6); cursor: pointer; }
+    .verify-gate-btn.unlocked { background: var(--primary-light); color: #0f121d; cursor: pointer; animation: pulse-glow 1.5s ease-in-out infinite; }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 10px rgba(158,186,243,0.4); }
+      50% { box-shadow: 0 0 25px rgba(158,186,243,0.8), 0 0 40px rgba(158,186,243,0.4); }
     }
 
-    .verify-btn.half {
-      background: linear-gradient(90deg, var(--primary-light) 50%, rgba(255,255,255,0.1) 50%);
-      color: rgba(255, 255, 255, 0.5);
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-
-    .verify-btn.unlocked {
-      background: var(--primary-light);
-      color: #0f121d;
-      cursor: pointer;
-      box-shadow: 0 0 20px rgba(158, 186, 243, 0.4);
-    }
-
-    .verify-btn.unlocked:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 25px rgba(158, 186, 243, 0.6);
-    }
-
-    /* Support section */
-    .support-link {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      color: white;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      margin-bottom: 8px;
-    }
-
-    .support-link:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.15);
-    }
-
-    .support-link .logo-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-
-    .support-link .logo-placeholder {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      background: rgba(255,255,255,0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      flex-shrink: 0;
-    }
-
-    .support-link span {
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    .support-link small {
-      font-size: 9px;
-      color: rgba(255, 255, 255, 0.4);
-      display: block;
-    }
-
-    /* Download card in admin */
-    .download-card {
-      background: rgba(74, 222, 128, 0.1);
-      border: 1px solid rgba(74, 222, 128, 0.3);
-      border-radius: 12px;
-      padding: 12px;
-      margin-top: 8px;
+    .admin-modal {
       display: none;
-    }
-
-    .download-card.show {
-      display: block;
-    }
-
-    .download-card .file-name {
-      font-size: 11px;
-      color: #4ade80;
-      word-break: break-all;
-      margin-bottom: 8px;
-    }
-
-    /* Page loading overlay */
-    .page-loader {
       position: fixed;
       inset: 0;
-      background: var(--bg-deep);
-      z-index: 999;
-      display: flex;
-      flex-direction: column;
+      background: rgba(15,18,29,0.95);
+      z-index: 100;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.3s ease;
-      gap: 16px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      overflow-y: auto;
+      padding: 16px;
+    }
+    .admin-modal.active { display: flex; }
+
+    .status-msg { display: none; animation: slideIn 0.4s ease-out; }
+    @keyframes slideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+    .settings-section {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .settings-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(255,255,255,0.5); margin-bottom: 12px; }
+
+    .error-text { color: #f87171; font-size: 0.7rem; margin-top: 4px; display: none; align-items: center; gap: 4px; }
+    .error-text.show { display: flex; }
+
+    .validation-msg { text-align: center; font-size: 0.7rem; margin-top: 8px; display: none; align-items: center; justify-content: center; gap: 4px; }
+    .validation-msg.show { display: flex; }
+    .validation-msg.error { color: #f87171; }
+
+    .confirm-popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,18,29,0.9);
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
-    .page-loader.hidden {
-      opacity: 0;
-      pointer-events: none;
+    .phone-input-row { display: flex; gap: 8px; align-items: flex-start; width: 100%; max-width: 100%; box-sizing: border-box; }
+    .country-select-wrapper { position: relative; width: 85px; min-width: 85px; max-width: 85px; flex-shrink: 0; box-sizing: border-box; }
+
+    .country-select {
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      appearance: none !important;
+      background-color: rgba(255,255,255,0.05) !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%239EBAF3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: right 4px center !important;
+      background-size: 10px !important;
+      padding: 12px 20px 12px 8px !important;
+      font-size: 12px !important;
+      width: 100% !important;
+      cursor: pointer !important;
+      border: 1px solid rgba(255,255,255,0.1) !important;
+      border-radius: 16px !important;
+      color: white !important;
+      line-height: 1.4 !important;
+      min-height: 48px !important;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      display: block !important;
+      margin: 0 !important;
+      box-sizing: border-box;
+    }
+    .country-select option { background-color: #1a1e2e !important; color: white !important; padding: 10px !important; font-size: 13px !important; }
+
+    .phone-input-field { flex: 1 1 auto; min-width: 0; box-sizing: border-box; }
+    .phone-input-field input {
+      width: 100% !important; min-width: 0 !important; flex: 1 !important;
+      padding: 12px 16px !important; border-radius: 16px !important;
+      box-sizing: border-box !important; font-size: 14px !important;
     }
 
-    .page-loader .loader-circle {
-      width: 40px;
-      height: 40px;
-      border: 3px solid rgba(255,255,255,0.1);
-      border-top-color: var(--primary-light);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
+    .contact-counter { text-align: center; font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(158,186,243,0.7); margin-top: 16px; font-weight: 600; min-height: 16px; }
 
-    .page-loader .loader-text {
-      color: rgba(158, 186, 243, 0.7);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      animation: pulse 1.5s ease-in-out infinite;
-    }
+    .support-link { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; color: white; text-decoration: none; transition: all 0.3s ease; margin-bottom: 8px; }
+    .support-link:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); }
+    .support-link .logo-icon { width: 28px; height: 28px; border-radius: 6px; object-fit: contain; flex-shrink: 0; }
+    .support-link .logo-placeholder { width: 28px; height: 28px; border-radius: 6px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+    .support-link span { font-size: 12px; font-weight: 500; }
+    .support-link small { font-size: 9px; color: rgba(255,255,255,0.4); display: block; }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+    .download-card { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.3); border-radius: 12px; padding: 12px; margin-top: 8px; display: none; }
+    .download-card.show { display: block; }
+    .download-card .file-name { font-size: 11px; color: #4ade80; word-break: break-all; margin-bottom: 8px; }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
-    }
+    .page-loader { position: fixed; inset: 0; background: var(--bg-deep); z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.3s ease; gap: 16px; }
+    .page-loader.hidden { opacity: 0; pointer-events: none; }
+    .page-loader .loader-circle { width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--primary-light); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    .page-loader .loader-text { color: rgba(255,255,255,0.6); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; }
 
-    select::-webkit-scrollbar {
-      width: 8px;
-    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-    select::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 4px;
-    }
+    select::-webkit-scrollbar { width: 8px; }
+    select::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 4px; }
+    select::-webkit-scrollbar-thumb { background: rgba(158,186,243,0.3); border-radius: 4px; }
 
-    select::-webkit-scrollbar-thumb {
-      background: rgba(158, 186, 243, 0.3);
-      border-radius: 4px;
-    }
-
-    #title-trigger {
-      user-select: none;
-      -webkit-user-select: none;
-      cursor: pointer;
-    }
-
-    .spinner {
-      border: 2px solid rgba(255,255,255,0.2);
-      border-top: 2px solid #9EBAF3;
-      border-radius: 50%;
-      width: 16px;
-      height: 16px;
-      animation: spin 0.8s linear infinite;
-      display: inline-block;
-    }
+    #title-trigger { user-select: none; -webkit-user-select: none; cursor: pointer; }
+    .spinner { border: 2px solid rgba(255,255,255,0.2); border-top: 2px solid #9EBAF3; border-radius: 50%; width: 16px; height: 16px; animation: spin 0.8s linear infinite; display: inline-block; }
 
     @media (max-width: 400px) {
-      .country-select-wrapper {
-        width: 80px;
-        min-width: 80px;
-        max-width: 80px;
-      }
-      
-      .country-select {
-        font-size: 11px !important;
-        padding: 10px 18px 10px 6px !important;
-      }
-      
-      .phone-input-field input {
-        padding: 10px 12px !important;
-        font-size: 13px !important;
-      }
+      .country-select-wrapper { width: 80px; min-width: 80px; max-width: 80px; }
+      .country-select { font-size: 11px !important; padding: 10px 18px 10px 6px !important; }
+      .phone-input-field input { padding: 10px 12px !important; font-size: 13px !important; }
     }
 
-    /* for community */
+    /* WhatsApp Group */
 .support-link:nth-child(2) span {
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 
                0 0 15px rgba(0, 0, 0, 0.3);
@@ -567,70 +378,66 @@
                0 0 15px rgba(0, 0, 0, 0.3);
 }
 
-/* All small text */
-.support-link small {
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+/* FOR SUPPORT LINK POP UP */
+.support-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-bottom: 8px;
+  /* Add these shadow effects */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3),
+              0 0 20px rgba(158, 186, 243, 0.1);
 }
-    
+
+.support-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  /* Enhanced shadow on hover */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4),
+              0 0 30px rgba(158, 186, 243, 0.2);
+  transform: translateY(-2px);
+}
+
   </style>
 </head>
 <body>
 
-  <!-- Page Loader -->
   <div class="page-loader" id="page-loader">
     <div class="loader-circle"></div>
     <p class="loader-text">LOADING...</p>
   </div>
 
-  <!-- Verification Gate -->
-  <div class="verification-gate" id="verification-gate">
-    <div class="liquid-glass w-full max-w-sm rounded-[32px] p-8 text-center">
-      <div class="text-4xl mb-4">🔐</div>
-      <h2 class="text-xl font-bold text-white mb-2">Join Our Channels</h2>
-      <p class="text-xs text-white/40 mb-6">Join both channels to unlock access</p>
-      
-      <a href="https://chat.whatsapp.com/CqDWVkWfW7bFPGQtfvZtuL" target="_blank" rel="noopener" class="channel-btn" id="channel-btn-1" onclick="markChannelCompleted(1)">
-        <div class="check-icon" id="check-1">✓</div>
-        <div>
-          <span>WhatsApp Group</span>
-          <small style="color: #4ade80;">Daily VCF Drops</small>
-        </div>
+  <div class="channel-gate-overlay" id="channel-gate">
+    <div class="channel-gate-card">
+      <p class="text-lg font-bold mb-2" style="color: #9EBAF3; text-shadow: 0 0 10px rgba(158,186,243,0.5);">🔒 JOIN TO UNLOCK</p>
+      <p class="text-xs text-white/50 mb-6">Join both channels to gain access</p>
+      <a href="https://chat.whatsapp.com/CqDWVkWfW7bFPGQtfvZtuL" target="_blank" rel="noopener" class="channel-btn" id="channel-btn-1" onclick="markChannelClicked(1)">
+        <span class="btn-icon">💬</span><span>WhatsApp Group</span><span class="btn-check">✅</span>
       </a>
-      
-      <a href="https://whatsapp.com/channel/0029Vb81WDLGJP8KsuPsL62x" target="_blank" rel="noopener" class="channel-btn" id="channel-btn-2" onclick="markChannelCompleted(2)">
-        <div class="check-icon" id="check-2">✓</div>
-        <div>
-          <span>WhatsApp Channel</span>
-          <small style="color: #fbbf24;">Daily Giveaways</small>
-        </div>
+      <a href="https://whatsapp.com/channel/0029Vb81WDLGJP8KsuPsL62x" target="_blank" rel="noopener" class="channel-btn" id="channel-btn-2" onclick="markChannelClicked(2)">
+        <span class="btn-icon">📢</span><span>WhatsApp Channel</span><span class="btn-check">✅</span>
       </a>
-      
-      <button class="verify-btn locked" id="verify-access-btn" disabled>
-        VERIFY & ACCESS
-      </button>
-      
-      <p class="text-[9px] text-white/20 mt-4">Click both links above to enable access</p>
+      <p class="text-[10px] text-white/30 mb-3" id="gate-status">Click both buttons above to unlock</p>
+      <button class="verify-gate-btn locked" id="verify-gate-btn" disabled onclick="verifyChannels()">🔒 VERIFY & ENTER</button>
     </div>
   </div>
 
-  <!-- MAIN CARD -->
   <div class="liquid-glass rounded-[40px] p-5 sm:p-8 text-center relative overflow-hidden" id="main-card" style="opacity: 0; transition: opacity 0.5s ease;">
     <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#9EBAF3]/10 blur-[60px] rounded-full"></div>
-
-    <div id="pfp-display" class="pfp-gradient w-24 h-24 rounded-full mx-auto mb-6 flex items-center justify-center text-white text-3xl font-bold border border-white/10">
-    </div>
-
-    <h1 id="title-trigger" class="text-xl sm:text-2xl font-black tracking-tight text-white/90 uppercase px-2">
-      MOONLIGHT VCF HOME
-    </h1>
-    <p class="text-[10px] tracking-[0.3em] text-[#9EBAF3] font-bold mb-10 opacity-90 uppercase">
-      BY ECLIPSIA TECHS
-    </p>
+    <div id="pfp-display" class="pfp-gradient w-24 h-24 rounded-full mx-auto mb-6 flex items-center justify-center text-white text-3xl font-bold border border-white/10"></div>
+    <h1 id="title-trigger" class="text-xl sm:text-2xl font-black tracking-tight text-white/90 uppercase px-2">MOONLIGHT VCF HOME</h1>
+    <p class="text-[10px] tracking-[0.3em] text-[#9EBAF3] font-bold mb-10 opacity-90 uppercase">BY ECLIPSIA TECHS</p>
 
     <div id="main-form" class="space-y-5 text-left">
-      <div id="success-msg" class="status-msg bg-[#9EBAF3]/10 border border-[#9EBAF3]/30 text-[#9EBAF3] p-4 rounded-2xl text-center text-sm mb-4">
-        ✨ Successfully added to the list!
-      </div>
+      <div id="success-msg" class="status-msg bg-[#9EBAF3]/10 border border-[#9EBAF3]/30 text-[#9EBAF3] p-4 rounded-2xl text-center text-sm mb-4">✨ Successfully added to the list!</div>
+      <div id="duplicate-msg" class="status-msg bg-red-500/10 border border-red-500/30 text-red-400 p-4 rounded-2xl text-center text-sm mb-4">⚠️ This number is already on the list!</div>
 
       <div>
         <label class="block text-[10px] text-white/40 uppercase tracking-[0.2em] ml-1 mb-2">Display Name</label>
@@ -741,11 +548,9 @@
               <option value="+960">🇲🇻 +960</option>
               <option value="+223">🇲🇱 +223</option>
               <option value="+356">🇲🇹 +356</option>
-              <option value="+692">🇲🇭 +692</option>
               <option value="+222">🇲🇷 +222</option>
               <option value="+230">🇲🇺 +230</option>
               <option value="+52">🇲🇽 +52</option>
-              <option value="+691">🇫🇲 +691</option>
               <option value="+373">🇲🇩 +373</option>
               <option value="+377">🇲🇨 +377</option>
               <option value="+976">🇲🇳 +976</option>
@@ -754,7 +559,6 @@
               <option value="+258">🇲🇿 +258</option>
               <option value="+95">🇲🇲 +95</option>
               <option value="+264">🇳🇦 +264</option>
-              <option value="+674">🇳🇷 +674</option>
               <option value="+977">🇳🇵 +977</option>
               <option value="+31">🇳🇱 +31</option>
               <option value="+64">🇳🇿 +64</option>
@@ -766,7 +570,6 @@
               <option value="+47">🇳🇴 +47</option>
               <option value="+968">🇴🇲 +968</option>
               <option value="+92">🇵🇰 +92</option>
-              <option value="+680">🇵🇼 +680</option>
               <option value="+507">🇵🇦 +507</option>
               <option value="+675">🇵🇬 +675</option>
               <option value="+595">🇵🇾 +595</option>
@@ -789,7 +592,6 @@
               <option value="+65">🇸🇬 +65</option>
               <option value="+421">🇸🇰 +421</option>
               <option value="+386">🇸🇮 +386</option>
-              <option value="+677">🇸🇧 +677</option>
               <option value="+252">🇸🇴 +252</option>
               <option value="+27">🇿🇦 +27</option>
               <option value="+82">🇰🇷 +82</option>
@@ -812,7 +614,6 @@
               <option value="+216">🇹🇳 +216</option>
               <option value="+90">🇹🇷 +90</option>
               <option value="+993">🇹🇲 +993</option>
-              <option value="+688">🇹🇻 +688</option>
               <option value="+256">🇺🇬 +256</option>
               <option value="+380">🇺🇦 +380</option>
               <option value="+971">🇦🇪 +971</option>
@@ -820,7 +621,6 @@
               <option value="+1">🇺🇸 +1</option>
               <option value="+598">🇺🇾 +598</option>
               <option value="+998">🇺🇿 +998</option>
-              <option value="+678">🇻🇺 +678</option>
               <option value="+58">🇻🇪 +58</option>
               <option value="+84">🇻🇳 +84</option>
               <option value="+967">🇾🇪 +967</option>
@@ -829,26 +629,27 @@
             </select>
           </div>
           <div class="phone-input-field">
-            <input type="tel" id="reg-phone" placeholder="8012******">
+            <input type="tel" id="reg-phone" placeholder="8012******" inputmode="numeric" pattern="[0-9]*">
           </div>
         </div>
       </div>
 
-      <button id="submit-btn" class="btn-primary w-full py-4 rounded-2xl font-black mt-4 shadow-xl uppercase tracking-widest text-xs">
+      <button id="submit-btn" class="btn-primary w-full py-4 rounded-2xl font-black mt-4 shadow-xl uppercase tracking-widest text-xs" disabled>
         JOIN THE LIST
       </button>
+
+      <p class="validation-msg error" id="validation-msg">⚠️ Phone number must be between 7 and 15 digits</p>
 
       <p class="contact-counter" id="contact-counter-display">
         <span id="contact-count-main">...</span> CONTACTS SAVED
       </p>
     </div>
 
-    <!-- Support Section -->
     <div class="mt-8 pt-6 border-t border-white/5">
   <p class="text-[11px] uppercase tracking-[0.3em] mb-4 text-center font-bold"
      style="
        color: #9EBAF3;
-       text-shadow: 0 0 10px rgba(19, 19, 19, 0.8), 
+       text-shadow: 0 0 10px rgba(0, 0, 0, 0.8), 
                     0 0 20px rgba(158, 186, 243, 0.5), 
                     0 0 40px rgba(158, 186, 243, 0.3);
        animation: glowPulse 2s ease-in-out infinite alternate;
@@ -856,39 +657,27 @@
      ">
     ✨ Join Our Community ✨
   </p>
-      
       <a href="https://chat.whatsapp.com/CqDWVkWfW7bFPGQtfvZtuL" target="_blank" rel="noopener" class="support-link">
         <img src="logos/whatsapp.png" alt="WhatsApp" class="logo-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="logo-placeholder" style="display:none;">💬</div>
-        <div>
-          <span>WhatsApp Group</span>
-          <small style="color: #ffffff; text-shadow: 0 0 8px rgba(0, 0, 0, 0.6), 0 0 15px rgba(74, 222, 128, 0.3);">Daily VCF Drops</small>
-        </div>
+        <div><span>WhatsApp Group</span><small style="color: #ffffff; text-shadow: 0 0 8px rgba(0, 0, 0, 0.6), 0 0 15px rgba(74, 222, 128, 0.3);">Daily VCF Drops</small></div>
       </a>
-      
       <a href="https://whatsapp.com/channel/0029Vb81WDLGJP8KsuPsL62x" target="_blank" rel="noopener" class="support-link">
         <img src="logos/whatsapp-channel.png" alt="Channel" class="logo-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="logo-placeholder" style="display:none;">📢</div>
-        <div>
-          <span>WhatsApp Channel</span>
-          <small style="color: #000000; text-shadow: 0 0 8px rgba(0, 0, 0, 0.6), 0 0 15px rgba(74, 222, 128, 0.3);">Daily Giveaways</small>
-        </div>
+        <div><span>WhatsApp Channel</span><small style="color: #000000; text-shadow: 0 0 8px rgba(48, 48, 48, 0.6), 0 0 15px rgba(74, 222, 128, 0.3);">Daily Giveaways</small></div>
       </a>
-      
       <a href="https://t.me/eclipsia_techss" target="_blank" rel="noopener" class="support-link">
         <img src="logos/telegram.png" alt="Telegram" class="logo-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="logo-placeholder" style="display:none;">✈️</div>
-        <div>
-          <span>Telegram Channel</span>
-          <small style="color: #000000; text-shadow: 0 0 8px rgba(0, 0, 0, 0.6), 0 0 15px rgba(74, 222, 128, 0.3);">More premium Tools</small>
-        </div>
+        <div><span>Telegram Channel</span><small style="color: #000000; text-shadow: 0 0 8px rgba(17, 17, 17, 0.6), 0 0 15px rgba(74, 222, 128, 0.3);">More premium Tools and news</small></div>
       </a>
     </div>
 
     <p class="mt-8 text-[11px] leading-relaxed uppercase tracking-widest font-bold" 
    style="
-     color: #ececec;
-     text-shadow: 0 0 10px rgba(15, 15, 15, 0.8), 
+     color: #ffffff;
+     text-shadow: 0 0 10px rgba(0, 0, 0, 0.8), 
                   0 0 20px rgba(158, 186, 243, 0.5), 
                   0 0 40px rgba(158, 186, 243, 0.3),
                   0 0 80px rgba(158, 186, 243, 0.2);
@@ -896,26 +685,22 @@
      letter-spacing: 0.3em;
    ">
   Automatic status gain platform.<br>
-  © 2024 ECLIPSIA TECHNOLOGY.
+  © 2026 ECLIPSIA TECHNOLOGY.
 </p>
   </div>
 
-  <!-- ADMIN MODAL -->
+  <!-- ADMIN MODAL (same as before) -->
   <div id="admin-modal" class="admin-modal">
     <div class="liquid-glass w-full max-w-md rounded-[32px] p-6 sm:p-8 relative" style="max-height: 90vh; overflow-y: auto;">
       <button onclick="closeAdmin()" class="absolute top-4 right-4 text-white/40 hover:text-white transition text-2xl leading-none z-10">&times;</button>
-      
       <h2 class="text-xl font-bold mb-6 text-center text-[#9EBAF3]">Admin Terminal</h2>
-
       <div id="auth-section">
         <input type="password" id="admin-pass" placeholder="Enter Terminal Password" class="w-full p-4 rounded-2xl mb-1">
-        <p id="auth-error" class="error-text ml-1 hidden">❌ Incorrect password</p>
+        <p id="auth-error" class="error-text ml-1" style="display:none;">❌ Incorrect password</p>
         <button id="auth-btn" class="btn-primary w-full py-4 rounded-2xl font-bold uppercase text-xs tracking-widest mt-3 flex items-center justify-center gap-2" disabled>
-          <span id="auth-btn-text">VERIFY</span>
-          <span id="auth-spinner" class="spinner hidden"></span>
+          <span id="auth-btn-text">VERIFY</span><span id="auth-spinner" class="spinner hidden"></span>
         </button>
       </div>
-
       <div id="admin-panel" class="hidden">
         <div class="settings-section">
           <p class="settings-title">📊 Database Statistics</p>
@@ -924,33 +709,26 @@
             <span id="contact-count" class="text-4xl font-black text-[#9EBAF3]">...</span>
           </div>
         </div>
-
         <button id="export-btn" class="btn-primary w-full py-4 rounded-2xl font-bold mb-3 uppercase text-xs tracking-widest flex items-center justify-center gap-2">
-          <span id="export-btn-text">📥 GENERATE VCF FILE</span>
-          <span id="export-spinner" class="spinner hidden"></span>
+          <span id="export-btn-text">📥 GENERATE VCF FILE</span><span id="export-spinner" class="spinner hidden"></span>
         </button>
-
         <div class="download-card" id="download-card">
-          <p class="text-xs text-white/60 mb-1">✅ File ready to download:</p>
+          <p class="text-xs text-white/60 mb-1">✅ File ready:</p>
           <p class="file-name" id="download-file-name"></p>
-          <button id="download-btn" class="btn-secondary w-full py-2 rounded-xl text-xs font-bold uppercase mt-2">
-            💾 CLICK TO DOWNLOAD
-          </button>
+          <button id="download-btn" class="btn-secondary w-full py-2 rounded-xl text-xs font-bold uppercase mt-2">💾 CLICK TO DOWNLOAD</button>
         </div>
-        
-        <button onclick="closeAdmin()" class="text-white/20 text-[10px] uppercase tracking-widest hover:text-white transition w-full py-2 mt-3">
-          Exit Terminal
+        <button id="clear-all-btn" class="btn-danger w-full py-4 rounded-2xl font-bold mt-4 uppercase text-xs tracking-widest flex items-center justify-center gap-2">
+          <span id="clear-btn-text">🗑️ CLEAR ALL CONTACTS</span><span id="clear-spinner" class="spinner hidden"></span>
         </button>
+        <button onclick="closeAdmin()" class="text-white/20 text-[10px] uppercase tracking-widest hover:text-white transition w-full py-2 mt-3">Exit Terminal</button>
       </div>
     </div>
   </div>
 
-  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
   <script>
-    // Firebase initialization
     const firebaseConfig = {
       apiKey: "AIzaSyDrybU0rzh3OAMI_vV1pNRXthS9wc2FuKk",
       authDomain: "moonlight-vlc.firebaseapp.com",
@@ -960,180 +738,183 @@
       appId: "1:156876726379:web:6c2c0793b754f1f2b0d12e",
       measurementId: "G-C0SYN7DB45"
     };
-
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
     const contactsRef = db.collection("contacts");
     const authDocRef = db.collection("settings").doc("auth");
 
-    // ==========================================
-    // VERIFICATION GATE LOGIC
-    // ==========================================
-    let channel1Clicked = false;
-    let channel2Clicked = false;
-    let accessGranted = false;
-
-    // Check if user already has access (stored in localStorage)
-    function checkExistingAccess() {
-      const savedAccess = localStorage.getItem('moonlightAccessGranted');
-      if (savedAccess === 'true') {
-        accessGranted = true;
-        document.getElementById('verification-gate').classList.add('hidden');
-        return true;
-      }
-      return false;
+    // Channel Gate
+    let channel1Clicked = false, channel2Clicked = false;
+    if (localStorage.getItem('moonlight_gate_passed') === 'true') {
+      document.getElementById('channel-gate').classList.add('hidden');
     }
 
-    function updateVerifyButton() {
-      const btn = document.getElementById('verify-access-btn');
-      
+    function markChannelClicked(n) {
+      if (n === 1) { channel1Clicked = true; document.getElementById('channel-btn-1').classList.add('completed'); }
+      if (n === 2) { channel2Clicked = true; document.getElementById('channel-btn-2').classList.add('completed'); }
+      updateGateButton();
+    }
+
+    function updateGateButton() {
+      const btn = document.getElementById('verify-gate-btn'), status = document.getElementById('gate-status');
       if (channel1Clicked && channel2Clicked) {
-        btn.className = 'verify-btn unlocked';
-        btn.disabled = false;
-        btn.textContent = '✅ VERIFY & ACCESS';
+        btn.className = 'verify-gate-btn unlocked'; btn.disabled = false; btn.innerHTML = '✅ VERIFY & ENTER';
+        status.textContent = 'All channels joined! Click to enter'; status.style.color = '#4ade80';
       } else if (channel1Clicked || channel2Clicked) {
-        btn.className = 'verify-btn half';
-        btn.disabled = true;
-        btn.textContent = 'JOIN BOTH CHANNELS...';
+        btn.className = 'verify-gate-btn half'; btn.disabled = false; btn.innerHTML = '🔓 VERIFY & ENTER';
+        status.textContent = 'Join the other channel to unlock fully'; status.style.color = 'rgba(158,186,243,0.7)';
       } else {
-        btn.className = 'verify-btn locked';
-        btn.disabled = true;
-        btn.textContent = 'VERIFY & ACCESS';
+        btn.className = 'verify-gate-btn locked'; btn.disabled = true; btn.innerHTML = '🔒 VERIFY & ENTER';
+        status.textContent = 'Click both buttons above to unlock'; status.style.color = 'rgba(255,255,255,0.3)';
       }
     }
 
-    window.markChannelCompleted = function(channelNum) {
-      if (channelNum === 1) {
-        channel1Clicked = true;
-        document.getElementById('channel-btn-1').classList.add('completed');
-        document.getElementById('check-1').textContent = '✓';
-      } else if (channelNum === 2) {
-        channel2Clicked = true;
-        document.getElementById('channel-btn-2').classList.add('completed');
-        document.getElementById('check-2').textContent = '✓';
-      }
-      updateVerifyButton();
-      
-      // Store channel clicks
-      localStorage.setItem('moonlightChannel1', channel1Clicked);
-      localStorage.setItem('moonlightChannel2', channel2Clicked);
-    };
-
-    // Handle verify button click
-    document.getElementById('verify-access-btn').addEventListener('click', function() {
+    function verifyChannels() {
       if (channel1Clicked && channel2Clicked) {
-        accessGranted = true;
-        localStorage.setItem('moonlightAccessGranted', 'true');
-        document.getElementById('verification-gate').classList.add('hidden');
+        localStorage.setItem('moonlight_gate_passed', 'true');
+        document.getElementById('channel-gate').classList.add('hidden');
+        const d = document.createElement('div');
+        d.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:rgba(74,222,128,0.2);border:1px solid rgba(74,222,128,0.4);padding:12px 24px;border-radius:12px;z-index:300;color:#4ade80;font-weight:600;font-size:14px;';
+        d.textContent = '✅ Access Granted!'; document.body.appendChild(d);
+        setTimeout(() => document.body.removeChild(d), 2000);
       }
+    }
+
+    // Page loader
+    function hidePageLoader() {
+      const l = document.getElementById('page-loader'), c = document.getElementById('main-card');
+      l.classList.add('hidden'); c.style.opacity = '1';
+      setTimeout(() => { if (l.parentNode) l.parentNode.removeChild(l); }, 500);
+    }
+
+    // Form validation
+    const nameInput = document.getElementById('reg-name');
+    const phoneInput = document.getElementById('reg-phone');
+    const submitBtn = document.getElementById('submit-btn');
+    const validationMsg = document.getElementById('validation-msg');
+
+    function validateForm() {
+      const name = nameInput.value.trim();
+      const phone = phoneInput.value.trim();
+      let isValid = true;
+      if (!name) isValid = false;
+      if (!phone || !/^[0-9]+$/.test(phone)) isValid = false;
+      submitBtn.disabled = !isValid;
+      validationMsg.classList.remove('show');
+      return isValid;
+    }
+
+    phoneInput.addEventListener('keydown', function(e) {
+      const allowed = ['Backspace','Delete','Tab','Escape','Enter','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'];
+      if (allowed.includes(e.key)) return;
+      if ((e.ctrlKey || e.metaKey) && ['a','c','v','x'].includes(e.key.toLowerCase())) return;
+      if (!/^[0-9]$/.test(e.key)) e.preventDefault();
     });
 
-    // Restore channel states from localStorage
-    function restoreChannelStates() {
-      const saved1 = localStorage.getItem('moonlightChannel1');
-      const saved2 = localStorage.getItem('moonlightChannel2');
-      
-      if (saved1 === 'true') {
-        channel1Clicked = true;
-        document.getElementById('channel-btn-1').classList.add('completed');
-        document.getElementById('check-1').textContent = '✓';
-      }
-      
-      if (saved2 === 'true') {
-        channel2Clicked = true;
-        document.getElementById('channel-btn-2').classList.add('completed');
-        document.getElementById('check-2').textContent = '✓';
-      }
-      
-      updateVerifyButton();
-    }
+    phoneInput.addEventListener('paste', function(e) {
+  e.preventDefault();
+  const data = (e.clipboardData || window.clipboardData).getData('text');
+  // Remove all non-numeric characters (spaces, dashes, parentheses, etc.)
+  const cleaned = data.replace(/[^0-9]/g, '');
+  
+  // Get current cursor position
+  const start = this.selectionStart;
+  const end = this.selectionEnd;
+  const currentValue = this.value;
+  
+  // Insert cleaned numbers at cursor position
+  this.value = currentValue.slice(0, start) + cleaned + currentValue.slice(end);
+  
+  // Move cursor to end of pasted text
+  this.selectionStart = this.selectionEnd = start + cleaned.length;
+  
+  // Trigger input event for validation
+  this.dispatchEvent(new Event('input'));
+});
 
-    // ==========================================
-    // PAGE LOADER
-    // ==========================================
-    function hidePageLoader() {
-      const loader = document.getElementById('page-loader');
-      const mainCard = document.getElementById('main-card');
-      
-      loader.classList.add('hidden');
-      mainCard.style.opacity = '1';
-      
-      setTimeout(() => {
-        if (loader.parentNode) loader.parentNode.removeChild(loader);
-      }, 500);
-    }
+    phoneInput.addEventListener('input', function() {
+      const cleaned = this.value.replace(/[^0-9]/g, '');
+      if (this.value !== cleaned) this.value = cleaned;
+      validateForm();
+    });
 
-    // ==========================================
-    // UPDATE CONTACT COUNTER
-    // ==========================================
+    nameInput.addEventListener('input', validateForm);
+
+    // Counter
     async function updateContactCounter() {
-      const mainCounter = document.getElementById('contact-count-main');
-      const adminCounter = document.getElementById('contact-count');
-      try {
-        const snapshot = await contactsRef.get();
-        const count = snapshot.size;
-        if (mainCounter) { mainCounter.textContent = count; mainCounter.parentElement.classList.remove('loading'); }
-        if (adminCounter) adminCounter.textContent = count;
-        return count;
-      } catch (e) {
-        console.error('Counter error:', e);
-        if (mainCounter) mainCounter.textContent = '0';
-        if (adminCounter) adminCounter.textContent = '0';
-        return 0;
-      }
+      const mc = document.getElementById('contact-count-main'), ac = document.getElementById('contact-count');
+      try { const s = await contactsRef.get(); const c = s.size; if (mc) mc.textContent = c; if (ac) ac.textContent = c; return c; }
+      catch (e) { if (mc) mc.textContent = '0'; if (ac) ac.textContent = '0'; return 0; }
     }
 
-    // ==========================================
-    // SUBMIT CONTACT
-    // ==========================================
-    document.getElementById('submit-btn').addEventListener('click', async function() {
-      if (!accessGranted) {
-        document.getElementById('verification-gate').classList.remove('hidden');
+    // Submit
+    submitBtn.addEventListener('click', async function() {
+      if (!validateForm()) return;
+      const name = nameInput.value.trim();
+      const countryCode = document.getElementById('country-code').value;
+      const phoneNum = phoneInput.value.trim();
+      const fullNumber = countryCode + phoneNum;
+
+      if (phoneNum.length < 7 || phoneNum.length > 15) {
+        validationMsg.textContent = '⚠️ Phone number must be between 7 and 15 digits';
+        validationMsg.classList.add('show');
+        setTimeout(() => validationMsg.classList.remove('show'), 4000);
         return;
       }
-      
-      const name = document.getElementById('reg-name').value.trim();
-      const countryCode = document.getElementById('country-code').value;
-      const phoneNum = document.getElementById('reg-phone').value.trim();
-      if (!name || !phoneNum) { alert("Please complete the form."); return; }
 
-      const fullNumber = countryCode + phoneNum.replace(/\s+/g, '');
-      const btn = document.getElementById('submit-btn');
-      btn.disabled = true;
-      btn.innerText = "ADDING...";
-      
+      submitBtn.disabled = true;
+      submitBtn.innerText = "CHECKING...";
+
       try {
+       // Check if phone number already exists
+const phoneExists = await contactsRef.where("phone", "==", fullNumber).get();
+if (!phoneExists.empty) {
+  document.getElementById('duplicate-msg').textContent = '⚠️ This phone number is already on the list!';
+  document.getElementById('duplicate-msg').style.display = 'block';
+  setTimeout(() => { document.getElementById('duplicate-msg').style.display = 'none'; }, 4000);
+  submitBtn.disabled = false;
+  submitBtn.innerText = "JOIN THE LIST";
+  validateForm();
+  return;
+}
+
+// Check if name already exists
+const nameExists = await contactsRef.where("name", "==", name).get();
+if (!nameExists.empty) {
+  document.getElementById('duplicate-msg').textContent = '⚠️ This name is already on the list!';
+  document.getElementById('duplicate-msg').style.display = 'block';
+  setTimeout(() => { document.getElementById('duplicate-msg').style.display = 'none'; }, 4000);
+  submitBtn.disabled = false;
+  submitBtn.innerText = "JOIN THE LIST";
+  validateForm();
+  return;
+}
+
+        submitBtn.innerText = "ADDING...";
         await contactsRef.add({ name, phone: fullNumber, timestamp: firebase.firestore.FieldValue.serverTimestamp() });
         document.getElementById('success-msg').style.display = 'block';
-        document.getElementById('reg-name').value = '';
-        document.getElementById('reg-phone').value = '';
-        await updateContactCounter();
+        nameInput.value = ''; phoneInput.value = '';
+        await updateContactCounter(); validateForm();
         setTimeout(() => { document.getElementById('success-msg').style.display = 'none'; }, 5000);
       } catch (e) {
-        console.error('Save error:', e);
-        alert("Error: " + (e.message || "Could not save. Try again."));
+        alert("Error: " + (e.message || "Could not save."));
       } finally {
-        btn.disabled = false;
-        btn.innerText = "JOIN THE LIST";
+        submitBtn.disabled = false;
+        submitBtn.innerText = "JOIN THE LIST";
+        validateForm();
       }
     });
 
-    // ==========================================
-    // ADMIN ACCESS
-    // ==========================================
-    let clickCount = 0;
-    let clickTimer = null;
-    
+    // Admin
+    let clickCount = 0, clickTimer = null;
     document.getElementById('title-trigger').addEventListener('click', function(e) {
       e.preventDefault();
       if (clickTimer) clearTimeout(clickTimer);
-      clickCount++;
-      clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
+      clickCount++; clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
       if (clickCount >= 5) {
-        clickCount = 0;
-        clearTimeout(clickTimer);
+        clickCount = 0; clearTimeout(clickTimer);
         document.getElementById('admin-pass').value = '';
-        document.getElementById('auth-error').classList.add('hidden');
+        document.getElementById('auth-error').style.display = 'none';
         document.getElementById('auth-section').classList.remove('hidden');
         document.getElementById('admin-panel').classList.add('hidden');
         document.getElementById('auth-btn').disabled = true;
@@ -1146,143 +927,134 @@
 
     document.getElementById('admin-pass').addEventListener('input', function(e) {
       document.getElementById('auth-btn').disabled = e.target.value.trim() === '';
-      document.getElementById('auth-error').classList.add('hidden');
+      document.getElementById('auth-error').style.display = 'none';
     });
 
     document.getElementById('auth-btn').addEventListener('click', async function() {
       const pass = document.getElementById('admin-pass').value.trim();
       if (!pass) return;
-      const btn = document.getElementById('auth-btn');
-      const spinner = document.getElementById('auth-spinner');
-      const text = document.getElementById('auth-btn-text');
-      btn.disabled = true;
-      spinner.classList.remove('hidden');
-      text.textContent = '';
-      document.getElementById('auth-error').classList.add('hidden');
+      const btn = document.getElementById('auth-btn'), spinner = document.getElementById('auth-spinner'), text = document.getElementById('auth-btn-text');
+      btn.disabled = true; spinner.classList.remove('hidden'); text.textContent = '';
+      document.getElementById('auth-error').style.display = 'none';
       try {
         const authSnap = await authDocRef.get();
-        let storedPassword = authSnap.exists ? authSnap.data().password : null;
-        if (!storedPassword) { await authDocRef.set({ password: "MOONLIGHTISGREAT" }); storedPassword = "MOONLIGHTISGREAT"; }
-        if (pass === storedPassword) {
+        let stored = authSnap.exists ? authSnap.data().password : null;
+        if (!stored) { await authDocRef.set({ password: "MOONLIGHTISGREAT" }); stored = "MOONLIGHTISGREAT"; }
+        if (pass === stored) {
           document.getElementById('auth-section').classList.add('hidden');
           document.getElementById('admin-panel').classList.remove('hidden');
           await updateContactCounter();
-        } else {
-          document.getElementById('auth-error').classList.remove('hidden');
-        }
-      } catch (e) {
-        console.error('Auth error:', e);
-        alert('Error: ' + e.message);
-      } finally {
-        spinner.classList.add('hidden');
-        text.textContent = 'VERIFY';
-        btn.disabled = false;
+        } else { document.getElementById('auth-error').style.display = 'flex'; }
+      } catch (e) { alert('Error: ' + e.message); } finally {
+        spinner.classList.add('hidden'); text.textContent = 'VERIFY'; btn.disabled = false;
         document.getElementById('auth-btn').disabled = document.getElementById('admin-pass').value.trim() === '';
       }
     });
 
-    // ==========================================
-    // VCF EXPORT
-    // ==========================================
-    let lastVcfBlob = null;
-    let lastFileName = '';
-
+    // Export
+    let lastVcfBlob = null, lastFileName = '';
     document.getElementById('export-btn').addEventListener('click', async function() {
-      const exportBtn = document.getElementById('export-btn');
-      const exportSpinner = document.getElementById('export-spinner');
-      const exportText = document.getElementById('export-btn-text');
-      const downloadCard = document.getElementById('download-card');
-      
-      exportBtn.disabled = true;
-      exportSpinner.classList.remove('hidden');
-      exportText.textContent = 'FETCHING...';
-      downloadCard.classList.remove('show');
-      
+      const eb = document.getElementById('export-btn'), es = document.getElementById('export-spinner'), et = document.getElementById('export-btn-text'), dc = document.getElementById('download-card');
+      eb.disabled = true; es.classList.remove('hidden'); et.textContent = 'FETCHING...'; dc.classList.remove('show');
       try {
         const snapshot = await contactsRef.orderBy("timestamp", "desc").get();
-        
         if (snapshot.empty) {
-          const modal = document.createElement('div');
-          modal.style.cssText = 'position:fixed;inset:0;background:rgba(15,18,29,0.9);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:200;';
-          modal.innerHTML = `<div class="liquid-glass" style="padding:24px;border-radius:24px;text-align:center;max-width:280px;"><p class="text-xl font-bold text-white mb-4">📭 Database Empty</p><p class="text-sm text-white/60 mb-6">No contacts found.</p><button id="close-empty" class="btn-primary py-2 px-6 rounded-xl font-bold text-xs uppercase">OK</button></div>`;
-          document.body.appendChild(modal);
-          document.getElementById('close-empty').onclick = () => document.body.removeChild(modal);
-          return;
+          const m = document.createElement('div');
+          m.style.cssText = 'position:fixed;inset:0;background:rgba(15,18,29,0.9);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:200;';
+          m.innerHTML = `<div class="liquid-glass" style="padding:24px;border-radius:24px;text-align:center;max-width:280px;"><p class="text-xl font-bold text-white mb-4">📭 Database Empty</p><p class="text-sm text-white/60 mb-6">No contacts found.</p><button id="close-empty" class="btn-primary py-2 px-6 rounded-xl font-bold text-xs uppercase">OK</button></div>`;
+          document.body.appendChild(m); document.getElementById('close-empty').onclick = () => document.body.removeChild(m); return;
         }
-        
-        let vcfContent = "";
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          if (data && data.name && data.phone) {
-            vcfContent += "BEGIN:VCARD\r\nVERSION:3.0\r\nFN:" + data.name + " (ML)\r\nTEL;TYPE=CELL:" + data.phone + "\r\nEND:VCARD\r\n";
-          }
-        });
-        
-        if (!vcfContent) { alert("No valid contacts found."); return; }
-        
+        let vcf = "";
+        snapshot.forEach(doc => { const d = doc.data(); if (d && d.name && d.phone) vcf += "BEGIN:VCARD\r\nVERSION:3.0\r\nFN:" + d.name + " (ML)\r\nTEL;TYPE=CELL:" + d.phone + "\r\nEND:VCARD\r\n"; });
+        if (!vcf) { alert("No valid contacts found."); return; }
         lastFileName = "Moonlight_Contacts_" + new Date().toISOString().slice(0,10) + ".vcf";
-        lastVcfBlob = new Blob([vcfContent], { type: 'text/vcard;charset=utf-8' });
-        
+        lastVcfBlob = new Blob([vcf], { type: 'text/vcard;charset=utf-8' });
         document.getElementById('download-file-name').textContent = lastFileName + " (" + snapshot.size + " contacts)";
-        downloadCard.classList.add('show');
-        
+        dc.classList.add('show');
         const url = URL.createObjectURL(lastVcfBlob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = lastFileName;
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        
+        const a = document.createElement('a'); a.href = url; a.download = lastFileName; a.style.display = 'none';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
         await updateContactCounter();
-      } catch (e) {
-        console.error('Export error:', e);
-        alert('Export failed: ' + (e.message || 'Unknown error'));
-      } finally {
-        exportBtn.disabled = false;
-        exportSpinner.classList.add('hidden');
-        exportText.textContent = '📥 GENERATE VCF FILE';
+      } catch (e) { alert('Export failed: ' + (e.message || 'Unknown error')); } finally {
+        eb.disabled = false; es.classList.add('hidden'); et.textContent = '📥 GENERATE VCF FILE';
       }
     });
 
     document.getElementById('download-btn').addEventListener('click', function() {
       if (lastVcfBlob) {
         const url = URL.createObjectURL(lastVcfBlob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = lastFileName;
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      } else {
-        alert('No file generated yet.');
-      }
+        const a = document.createElement('a'); a.href = url; a.download = lastFileName; a.style.display = 'none';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      } else { alert('No file generated yet.'); }
     });
 
-    // ==========================================
-    // INITIALIZATION
-    // ==========================================
-    window.addEventListener('load', async () => {
-      // Check if user already has access
-      const hasAccess = checkExistingAccess();
-      
-      if (!hasAccess) {
-        // Restore channel click states
-        restoreChannelStates();
-        
-        // If both were clicked before but not verified, show gate
-        if (channel1Clicked && channel2Clicked) {
-          updateVerifyButton();
+    // Clear all contacts with popup
+    document.getElementById('clear-all-btn').addEventListener('click', function() {
+      const overlay = document.createElement('div');
+      overlay.className = 'confirm-popup-overlay';
+      overlay.innerHTML = `
+        <div class="liquid-glass" style="padding:24px;border-radius:24px;text-align:center;max-width:320px;width:90%;">
+          <p class="text-xl font-bold text-white mb-2">⚠️ Clear All Contacts?</p>
+          <p class="text-sm text-white/60 mb-6">This will permanently delete ALL contacts. This action cannot be undone!</p>
+          <div class="flex gap-3">
+            <button id="confirm-cancel" class="btn-secondary flex-1 py-3 rounded-xl text-xs font-bold uppercase">Cancel</button>
+            <button id="confirm-delete" class="btn-danger flex-1 py-3 rounded-xl text-xs font-bold uppercase">Yes, Delete All</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+
+      document.getElementById('confirm-cancel').addEventListener('click', () => document.body.removeChild(overlay));
+
+      document.getElementById('confirm-delete').addEventListener('click', async () => {
+        document.body.removeChild(overlay);
+        const cb = document.getElementById('clear-all-btn'), cs = document.getElementById('clear-spinner'), ct = document.getElementById('clear-btn-text');
+        cb.disabled = true; cs.classList.remove('hidden'); ct.textContent = 'DELETING...';
+        try {
+          const snapshot = await contactsRef.get();
+          const deletedCount = snapshot.size;
+          const batch = db.batch();
+          snapshot.forEach(doc => batch.delete(doc.ref));
+          await batch.commit();
+          await updateContactCounter();
+
+          const successOverlay = document.createElement('div');
+          successOverlay.className = 'confirm-popup-overlay';
+          successOverlay.innerHTML = `
+            <div class="liquid-glass" style="padding:24px;border-radius:24px;text-align:center;max-width:320px;width:90%;">
+              <p class="text-4xl mb-4">✅</p>
+              <p class="text-xl font-bold text-white mb-2">Successfully Deleted</p>
+              <p class="text-sm text-white/60 mb-6">${deletedCount} contacts have been permanently removed.</p>
+              <button id="success-ok" class="btn-primary w-full py-3 rounded-xl font-bold text-xs uppercase">OK</button>
+            </div>
+          `;
+          document.body.appendChild(successOverlay);
+          document.getElementById('success-ok').addEventListener('click', () => document.body.removeChild(successOverlay));
+        } catch (e) {
+          const errorOverlay = document.createElement('div');
+          errorOverlay.className = 'confirm-popup-overlay';
+          errorOverlay.innerHTML = `
+            <div class="liquid-glass" style="padding:24px;border-radius:24px;text-align:center;max-width:320px;width:90%;">
+              <p class="text-4xl mb-4">❌</p>
+              <p class="text-xl font-bold text-white mb-2">Error</p>
+              <p class="text-sm text-white/60 mb-6">Failed to delete contacts: ${e.message}</p>
+              <button id="error-ok" class="btn-primary w-full py-3 rounded-xl font-bold text-xs uppercase">OK</button>
+            </div>
+          `;
+          document.body.appendChild(errorOverlay);
+          document.getElementById('error-ok').addEventListener('click', () => document.body.removeChild(errorOverlay));
+        } finally {
+          cb.disabled = false; cs.classList.add('hidden'); ct.textContent = '🗑️ CLEAR ALL CONTACTS';
         }
-      }
-      
+      });
+    });
+
+    window.addEventListener('load', async () => {
       await updateContactCounter();
       setTimeout(hidePageLoader, 800);
       document.getElementById('auth-btn').disabled = true;
+      validateForm();
     });
-
     setInterval(updateContactCounter, 30000);
   </script>
 </body>
