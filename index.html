@@ -18,25 +18,26 @@
   document.documentElement.classList.add('is-loading');
   setTimeout(function(){document.documentElement.classList.remove('is-loading')},4500);
   /* Avoid a flash of the gate for people who already passed it */
+  try{ if(localStorage.getItem('moonlight_bg')==='off') document.documentElement.classList.add('bg-off'); }catch(_){}
   try{ if(localStorage.getItem('moonlight_gate_passed')==='true') document.documentElement.classList.add('gate-passed'); }catch(_){}
 </script>
 
 <style>
 /* ───────────────────────── Design tokens ───────────────────────── */
 :root{
-  --bg:#0b0c12;
+  --bg:#050505;
   --accent:#9EBAF3;
   --text:#f5f5f7;
   --muted:rgba(245,245,247,.64);
   --dim:rgba(245,245,247,.42);
-  --surface:rgba(24,25,33,.72);
-  --surface-hi:rgba(44,46,58,.86);
-  --border:rgba(255,255,255,.14);
-  --hairline:rgba(255,255,255,.09);
-  --panel:rgba(12,13,20,.52);
-  --list-bg:rgba(28,29,37,.97);
-  --scrim:linear-gradient(180deg,rgba(8,9,14,.50) 0%,rgba(8,9,14,.66) 100%);
-  --cta-bg:#ffffff; --cta-fg:#0b0c12;
+  --surface:rgba(22,22,22,.78);
+  --surface-hi:rgba(38,38,38,.90);
+  --border:rgba(255,255,255,.12);
+  --hairline:rgba(255,255,255,.08);
+  --panel:rgba(10,10,10,.55);
+  --list-bg:rgba(18,18,18,.98);
+  --scrim:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.70) 100%);
+  --cta-bg:#ffffff; --cta-fg:#050505;
   --ok:#34d399; --bad:#ff6b8a;
   --sk-a:rgba(255,255,255,.06); --sk-b:rgba(255,255,255,.15);
   --r-ctl:14px; --r-row:16px; --r-sheet:28px;
@@ -73,14 +74,45 @@ body,button,a,.row,.support-link,.tile,.brand-title{-webkit-user-select:none;use
 input{-webkit-user-select:text;user-select:text}
 a,button,label,.dd-list li{touch-action:manipulation}
 body{
-  background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.5;
+  background:transparent;color:var(--text);font-family:var(--font);line-height:1.5;
   -webkit-font-smoothing:antialiased;min-height:100svh;position:relative;
 }
 /* Background image kept – fixed layer works on iOS too */
 body::before{
   content:"";position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh;z-index:-1;pointer-events:none;
-  background:var(--scrim),url('images/image.png') center/cover no-repeat;
+  background-color:#050505;
+  background-image:var(--scrim),url('images/image.png');
+  background-position:center,center;
+  background-size:cover,cover;
+  background-repeat:no-repeat,no-repeat;
   transform:translateZ(0);backface-visibility:hidden;contain:strict;
+}
+/* Background OFF: pure black + soft faded-white ambient glows (no image downloaded) */
+html.bg-off body::before{
+  background-color:#000000;
+  background-image:
+    radial-gradient(85% 50% at 50% -8%,rgba(255,255,255,.18),transparent 68%),
+    radial-gradient(50% 42% at 108% 28%,rgba(255,255,255,.10),transparent 70%),
+    radial-gradient(52% 44% at -8% 72%,rgba(255,255,255,.08),transparent 70%),
+    radial-gradient(60% 30% at 50% 100%,rgba(255,255,255,.04),transparent 65%),
+    linear-gradient(180deg,#0a0a0a 0%,#050505 45%,#000000 100%);
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+}
+@media (prefers-color-scheme: light){
+  html.bg-off body::before{
+    background-color:#e8e9f0;
+    background-image:
+      radial-gradient(85% 50% at 50% -8%,rgba(255,255,255,.98),transparent 68%),
+      radial-gradient(50% 42% at 108% 28%,rgba(158,186,243,.20),transparent 70%),
+      radial-gradient(52% 44% at -8% 72%,rgba(158,186,243,.14),transparent 70%),
+      radial-gradient(60% 30% at 50% 100%,rgba(158,186,243,.08),transparent 65%),
+      linear-gradient(180deg,#f4f4f9 0%,#ebebf3 45%,#e0e1eb 100%);
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
+  }
 }
 svg.i{width:1em;height:1em;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .hidden{display:none!important}
@@ -94,10 +126,10 @@ svg.i{width:1em;height:1em;flex-shrink:0;fill:none;stroke:currentColor;stroke-wi
 .brand{width:100%}
 .banner{
   position:relative;width:100%;height:clamp(120px,34vw,170px);overflow:hidden;
-  background:linear-gradient(135deg,#1c2347 0%,#2a2f5a 45%,#0f1120 100%);
+  background:linear-gradient(135deg,#141414 0%,#1a1a1a 45%,#0a0a0a 100%);
 }
 .banner img{width:100%;height:100%;object-fit:cover;display:block}
-.banner::after{content:"";position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(180deg,transparent,rgba(8,9,14,.45));pointer-events:none}
+.banner::after{content:"";position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(180deg,transparent,rgba(0,0,0,.50));pointer-events:none}
 .brand-body{padding:0 20px 6px;display:flex;flex-direction:column;align-items:flex-start;text-align:left}
 .brand-pfp{
   width:88px;height:88px;border-radius:50%;flex-shrink:0;margin-top:-44px;position:relative;z-index:2;
@@ -315,6 +347,14 @@ html.gate-passed #channel-gate{display:none}
 .linkbtn:hover{color:var(--text)}
 .two{display:flex;gap:10px;margin-top:16px}.two .btn{margin-top:0}
 .pad-t{margin-top:12px}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.toggle-row b{display:block;font-size:15px;font-weight:600;color:var(--text)}
+.toggle-row small{margin:2px 0 0!important}
+.switch{width:52px;height:32px;border-radius:999px;border:1px solid var(--border);background:var(--surface-hi);cursor:pointer;position:relative;flex-shrink:0;transition:background .2s}
+.switch span{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.35);transition:transform .2s var(--ease)}
+.switch.on{background:var(--ok);border-color:transparent}
+.switch.on span{transform:translateX(20px)}
+.switch:disabled{opacity:.6}
 @media (hover:hover) and (min-width:760px){
   .gate,.modal{background:rgba(6,7,11,.6);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
 }
@@ -480,6 +520,10 @@ html.gate-passed #channel-gate{display:none}
     </div>
 
     <div id="admin-panel" class="hidden">
+      <div class="section toggle-row">
+        <div><b>Background image</b><small id="bg-state">On: showing your image</small></div>
+        <button id="bg-switch" class="switch on" type="button" role="switch" aria-checked="true" aria-label="Background image"><span></span></button>
+      </div>
       <div class="section"><small>Total contacts</small><div id="contact-count" class="big">…</div></div>
       <button id="export-btn" class="btn" type="button" style="margin-top:0">
         <svg class="i"><use href="#i-down"/></svg><span id="export-btn-text">Generate VCF file</span><span id="export-spinner" class="spinner"></span>
@@ -551,7 +595,26 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const contactsRef = db.collection("contacts");
 const authDocRef = db.collection("settings").doc("auth");
+const uiDocRef = db.collection("settings").doc("ui");
 const $ = id => document.getElementById(id);
+
+/* ───────── Background image on/off (saved for everyone in Firestore: settings/ui) ───────── */
+function applyBg(on) {
+  document.documentElement.classList.toggle('bg-off', !on);
+  const sw = $('bg-switch');
+  sw.classList.toggle('on', on); sw.setAttribute('aria-checked', on ? 'true' : 'false');
+  $('bg-state').textContent = on ? 'On: showing your image' : 'Off: black + soft white glow';
+  try { localStorage.setItem('moonlight_bg', on ? 'on' : 'off'); } catch (_) {}
+}
+$('bg-switch').addEventListener('click', async function () {
+  const sw = this, was = sw.classList.contains('on'), next = !was;
+  sw.disabled = true; applyBg(next);
+  try { await uiDocRef.set({ bgImage: next }, { merge: true }); }
+  catch (e) { applyBg(was); alert('Could not save: ' + (e.message || 'error')); }
+  finally { sw.disabled = false; }
+});
+uiDocRef.get().then(function (d) { applyBg(!(d.exists && d.data().bgImage === false)); })
+  .catch(function () { applyBg(!document.documentElement.classList.contains('bg-off')); });
 
 /* ───────── Skeleton → live content ───────── */
 function showApp() { document.documentElement.classList.remove('is-loading'); }
